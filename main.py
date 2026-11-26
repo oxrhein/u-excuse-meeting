@@ -20,8 +20,11 @@ ENTRY = (
 def build_line() -> str:
     """Return the single entry line, trimmed to one tight line."""
     line = " ".join(ENTRY.split())
-    if not (1 <= len(line) <= 200):
-        raise ValueError(f"entry line is {len(line)} chars, must be 1-200")
+    min_chars, max_chars = 1, 200  # gate: UTF-8 text, 1-200 chars
+    if not (min_chars <= len(line) <= max_chars):
+        raise ValueError(
+            f"entry line is {len(line)} chars, must be {min_chars}-{max_chars}"
+        )
     return line
 
 
